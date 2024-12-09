@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <h1>Inicie Sesión</h1>
+    <form>
+        <label>Ingrese su correo:</label><br>
+        <input type="email" placeholder="Ingrese su correo generado" id="correo"><br>
+        <label>Ingrese su contraseña:</label><br>
+        <input type="password" id="contraseña" placeholder="Ingrese su contraseña"><br>
+    </form>
+    <button type="button" onclick="comprobar()">Enviar</button>
+    <div id="resultado"></div>
+
+    <script>
+        let contador=0;
+        function comprobar() {
+            const correoGuardado=localStorage.getItem("correo");
+            const contrasenaGuardada=localStorage.getItem("contrasea");
+            const correoIngresado=document.getElementById("correo").value;
+            const contrasenaIngresada=document.getElementById("contraseña").value;
+
+            if (correoIngresado===correoGuardado && contrasenaIngresada === contrasenaGuardada) {
+                window.location.href = "index.html";
+            } else {
+                contador++;
+                if (contador>3) {
+                    document.getElementById("resultado").innerHTML="Tu cuenta está bloqueada.";
+                } else {
+                    document.getElementById("resultado").innerHTML="El correo o la contraseña no son válidos.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
